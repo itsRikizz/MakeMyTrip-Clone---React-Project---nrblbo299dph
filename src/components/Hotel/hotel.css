@@ -1,58 +1,36 @@
-.search-head {
-  background: linear-gradient(to right, #061627, #0f325a, #134175);
+.homeSearch:hover {
+  background-color: rgba(77, 171, 253, 0.2);
 }
 
-.head-info-box {
-  background-color: rgba(77, 171, 253, 0.1);
-  color: white;
-  /* margin-left: 1rem; */
-  /* margin-top: 1rem; */
+.flight-icon {
+  bottom: 30px;
+  width: 50%;
 }
 
-.search-body {
-  padding-top: 30px;
-  padding-bottom: 30px;
+.search-element {
+  cursor: pointer;
 }
 
-.search-item {
-  background-color: white;
+.search-element:hover {
+  background-color: rgba(77, 171, 253, 0.2);
 }
 
-p {
-  margin: 0;
-}
-h1,
-h2,
-h6,
-h5,
-hr {
-  margin: 0;
+.search-box {
+  top: 275px;
+  width: 275px;
 }
 
-.time-estimate {
-  width: 400px;
+.search-btn {
+  top: 65px;
 }
 
-.accordion-item {
-  width: 90%;
-  margin: auto;
-}
-
-.book-now {
-  height: 40px;
-}
-#forms {
-  display: flex;
-  flex-direction: column;
-  /* margin: 40px; */
-  padding: 20px;
+.flight-search-section {
+  background-color: #134175;
   width: 100%;
-  width: 300%;
+  height: 261px;
+  padding-top: 100px;
 }
-
-/* @media (max-width: 768px) {
-    .accordion-item {
-      width: 90%;
-      margin: auto;
-    }
-  } */
+.form-floating {
+  display: flex;
+  width: 150px;
+}

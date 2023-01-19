@@ -10,14 +10,13 @@ const FlightSearch = ({
   setDepart,
   arrival,
   setArrival,
+  flightsProps,
+  setFilteredFlights,
 }) => {
   const [flights, setFlights] = useState([]);
 
   const [flightOption, setFlightOption] = useState([]);
 
-  // const effect=()=>{
-
-  // }
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -25,11 +24,6 @@ const FlightSearch = ({
       );
       const data = await response.json();
       setFlightOption(data);
-      // let filterData = [...data];
-      // let newData = filterData.filter(
-      //   (data) => data.from == from && data.to == to
-      // );
-
       setFlights(data);
       console.log(data);
     } catch (error) {
@@ -43,7 +37,9 @@ const FlightSearch = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(from, to, depart, arrival);
+    let data = [...flightsProps];
+    let result = data.filter((data) => data.from == from && data.to == to);
+    setFilteredFlights(result);
   };
 
   const handleFromChange = (event) => {
@@ -66,7 +62,11 @@ const FlightSearch = ({
     <>
       <div className='flight-search-section'>
         <div className='container  bg-light  rounded-3 px-5 '>
-          <form onSubmit={handleSubmit} className='pb-5 pt-3'>
+          <form
+            onSubmit={handleSubmit}
+            className='pb-5 pt-3'
+            style={{ width: "100%", marginLeft: "100px" }}
+          >
             <div className='row g-2'>
               <div className='col-md'>
                 <div className='form-floating'>

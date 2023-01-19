@@ -1,30 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "../styles/App.css";
+import Login from "./Login/Login";
 
-import CheckOut from "./CheckOut/CheckOut";
-import FlightSearch from "./Flight/FlightSearch";
 import Master from "./Flight/Master";
-
-import Header from "./Header/Header";
-// import Hotel from "./Hotel/Hotel";
-// import HotelSearch from "./Hotel/HotelSearch";
-// import Login from "./Login/Login";
-// import SearchResult from "./Flight/SearchResult";
-// import Train from "./Train/Train";
+import MasterTrain from "./Train/MasterTrain";
+import MasterHotel from "./Hotel/MasterHotel";
+import Modals from "./CheckOut/Modals";
 
 const App = () => {
+  const [modal2Open, setModal2Open] = useState(true);
   return (
-    <div id='main'>
-      <Header />
-      <Master />
-
-      {/* <CheckOut />
-      <Login /> */}
-
-      {/* <Hotel /> */}
-      {/* <Train /> */}
-    </div>
+    <BrowserRouter>
+      <div id='main'>
+        <Routes>
+          <Route
+            path='/Master'
+            element={
+              <Master modal2Open={modal2Open} setModal2Open={setModal2Open} />
+            }
+          />
+          <Route path='/' element={<Login />} />
+          <Route
+            path='/checkout'
+            element={
+              <Modals modal2Open={modal2Open} setModal2Open={setModal2Open} />
+            }
+          />
+          <Route
+            path='/hotels'
+            element={
+              <MasterHotel
+                modal2Open={modal2Open}
+                setModal2Open={setModal2Open}
+              />
+            }
+          />
+          <Route path='/trains' element={<MasterTrain />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+    // <MasterHotel />
   );
 };
 

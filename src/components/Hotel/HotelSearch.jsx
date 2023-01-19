@@ -1,40 +1,62 @@
-import React, { useEffect, useState } from "react";
-import Hotel from "./Hotel";
+import React, { useState, useEffect } from "react";
+import "./hotel.css";
 
-const HotelSearch = () => {
+const HotelSearch = ({
+  from,
+  setfrom,
+
+  HotelsProps,
+  setFilteredHotels,
+}) => {
   const [hotels, setHotels] = useState([]);
-  const [selectedFlight, setSelectedFlight] = useState(null);
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [price, setPrice] = useState(null);
+
   const [hotelOption, setHotelOption] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `https://content.newtonschool.co/v1/pr/63b85bcf735f93791e09caf4/hotels`
+      );
+      const data = await response.json();
+      setHotelOption(data);
+      setHotels(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://content.newtonschool.co/v1/pr/63b85e152cabb8fdea2673ee/trains`
-        );
-        const data = await response.json();
-        setHotelOption(data);
-        setHotels(data);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(hotels);
-    // Send the form data to your server or process it here
+    let data = [...HotelsProps];
+    let result = data.filter((data) => data.city == from);
+    setFilteredHotels(result);
+  };
+
+  const handleFromChange = (event) => {
+    setfrom(event.target.value);
+  };
+  const handleToChange = (event) => {
+    setTo(event.target.value);
+  };
+
+  const handleDepartureChange = (event) => {
+    setDepart(event.target.value);
   };
 
   return (
     <>
       <div className='flight-search-section'>
         <div className='container  bg-light  rounded-3 px-5 '>
-          <form onSubmit={handleSubmit} className='pb-5 pt-3'>
+          <form
+            onSubmit={handleSubmit}
+            className='pb-5 pt-3'
+            style={{ width: "100%", marginLeft: "100px" }}
+          >
             <div className='row g-2'>
               <div className='col-md'>
                 <div className='form-floating'>
@@ -43,17 +65,39 @@ const HotelSearch = () => {
                     id='floatingSelectGrid'
                     aria-label='Floating label select example'
                     defaultValue='1'
+                    onChange={handleFromChange}
                   >
                     <option value='' disabled>
                       Select City
                     </option>
-                    {hotelOption.map((form, index) => (
-                      <option key={index} value={form.from}>
-                        {form.from}
+                    {hotelOption.map((city, index) => (
+                      <option key={index} value={city.city}>
+                        {city.city}
                       </option>
                     ))}
                   </select>
-                  <label htmlFor='floatingSelectGrid'>FROM</label>
+                  <label htmlFor='floatingSelectGrid'>CITY </label>
+                </div>
+              </div>
+
+              <div className='col-md'>
+                <div className='form-floating'>
+                  <input
+                    type='date'
+                    className='form-control'
+                    onChange={handleDepartureChange}
+                  />
+                  <label htmlFor='floatingSelectGrid'>CHECK-IN</label>
+                </div>
+              </div>
+              <div className='col-md'>
+                <div className='form-floating'>
+                  <input
+                    type='date'
+                    className='form-control'
+                    onChange={handleDepartureChange}
+                  />
+                  <label htmlFor='floatingSelectGrid'>CHECK-OUT</label>
                 </div>
               </div>
               <div className='col-md'>
@@ -63,29 +107,16 @@ const HotelSearch = () => {
                     id='floatingSelectGrid'
                     aria-label='Floating label select example'
                     defaultValue='2'
+                    onChange={handleToChange}
                   >
                     <option value='' disabled>
-                      Select City
+                      Select class
                     </option>
-                    {hotelOption.map((to, index) => (
-                      <option key={index} value={to.to}>
-                        {to.to}
-                      </option>
-                    ))}
+                    <option value=''>A</option>
+                    <option value=''>B</option>
+                    <option value=''>C</option>
                   </select>
-                  <label htmlFor='floatingSelectGrid'>TO</label>
-                </div>
-              </div>
-              <div className='col-md'>
-                <div className='form-floating'>
-                  <input type='date' className='form-control' />
-                  <label htmlFor='floatingSelectGrid'>Travel Date</label>
-                </div>
-              </div>
-              <div className='col-md'>
-                <div className='form-floating'>
-                  <input type='date' className='form-control' />
-                  <label htmlFor='floatingSelectGrid'>Return Date</label>
+                  <label htmlFor='floatingSelectGrid'>CLASS</label>
                 </div>
               </div>
             </div>
@@ -97,7 +128,6 @@ const HotelSearch = () => {
           </form>
         </div>
       </div>
-      {/* <Hotel /> */}
     </>
   );
 };

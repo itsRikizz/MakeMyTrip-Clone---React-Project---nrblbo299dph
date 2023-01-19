@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
@@ -6,12 +7,25 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
+  const [userEmail, setUserEmail] = useState("pain.sanmay@gmail.com");
+  const [userPass, setUserPass] = useState("7001790257");
+
+  localStorage.setItem("email", userEmail);
+  localStorage.setItem("password", userPass);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      setError("Please enter email and password");
+      alert("Please enter email and password");
+    } else if (
+      email === localStorage.getItem("email") &&
+      password === localStorage.getItem("password")
+    ) {
+      navigate("/Master");
     } else {
-      console.log(`Email: ${email} Password: ${password}`);
+      alert("Incorrect email or password. Please try again.");
     }
   };
 
@@ -27,14 +41,14 @@ const Login = () => {
           <button className='google-btn'>
             <img
               alt='Google'
-              src='https://assets.materialup.com/uploads/82eae29e-33b7-4ff7-be10-df432402b2b6/preview'
+              src='https://pixlok.com/wp-content/uploads/2021/04/Google-Icon-PNG-768x768.jpg'
             />
             <p className='btn-text'>Sign in with Google</p>
           </button>
           <button className='fb-btn'>
             <img
               alt='FB'
-              src='https://orchardviewmississippi.ca/wp-content/uploads/2014/07/facebook-icon.png'
+              src='https://e7.pngegg.com/pngimages/670/159/png-clipart-facebook-logo-social-media-facebook-computer-icons-linkedin-logo-facebook-icon-media-internet.png'
             />
           </button>
         </div>
