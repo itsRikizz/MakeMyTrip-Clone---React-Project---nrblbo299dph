@@ -19,7 +19,6 @@ const Master = () => {
       .then((data) => {
         setFilteredFlights(data);
         setFlights(data);
-        setPrices(data);
       });
   };
 
@@ -29,7 +28,6 @@ const Master = () => {
 
   return (
     <div>
-      <Header />
       <FlightSearch
         from={from}
         setfrom={setfrom}

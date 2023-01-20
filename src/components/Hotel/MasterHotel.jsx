@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import HotelSearch from "./HotelSearch";
 import HSearchRes from "./HSearchRes";
 
-const MasterHotel = ({ modal2Open, setModal2Open }) => {
+const MasterHotel = () => {
   const [from, setfrom] = useState("");
 
   const [hotels, setHotels] = useState([]);
@@ -26,7 +26,6 @@ const MasterHotel = ({ modal2Open, setModal2Open }) => {
 
   return (
     <div>
-      <Header />
       <HotelSearch
         from={from}
         setfrom={setfrom}
@@ -40,8 +39,6 @@ const MasterHotel = ({ modal2Open, setModal2Open }) => {
         setHotels={setHotels}
         filteredHotels={filteredHotels}
         setFilteredHotels={setFilteredHotels}
-        modal2Open={modal2Open}
-        setModal2Open={setModal2Open}
       />
     </div>
   );

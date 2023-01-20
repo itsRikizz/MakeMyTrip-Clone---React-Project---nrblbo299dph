@@ -28,7 +28,6 @@ const MasterTrain = ({ modal2Open, setModal2Open }) => {
 
   return (
     <div>
-      <Header />
       <TrainSearch
         from={from}
         setfrom={setfrom}

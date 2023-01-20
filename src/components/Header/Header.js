@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "./logo.png";
 import "./header.css";
 
@@ -9,10 +10,7 @@ const Header = () => {
 
   useEffect(() => {
     setMailId(localStorage.getItem("email"));
-    setPassword(localStorage.getItem("password"));
   }, []);
-
-  const navigate = useNavigate();
 
   return (
     <nav className='navbar'>
@@ -23,31 +21,25 @@ const Header = () => {
         <div className='navLinks'>
           <ul>
             <li>
-              <button
-                type='button'
-                class='btn btn-outline-danger'
-                onClick={() => navigate("/Master")}
-              >
-                FLIGHTS
-              </button>
+              <Link to='/'>
+                <button type='button' class='btn btn-outline-danger'>
+                  FLIGHTS
+                </button>
+              </Link>
             </li>
             <li>
-              <button
-                type='button'
-                class='btn btn-outline-danger'
-                onClick={() => navigate("/hotels")}
-              >
-                HOTELS
-              </button>
+              <Link to='/masterHotel'>
+                <button type='button' class='btn btn-outline-danger'>
+                  HOTELS
+                </button>
+              </Link>
             </li>
             <li>
-              <button
-                type='button'
-                class='btn btn-outline-danger'
-                onClick={() => navigate("/trains")}
-              >
-                TRAINS
-              </button>
+              <Link to='/masterTrain'>
+                <button type='button' className='btn btn-outline-danger'>
+                  TRAINS
+                </button>
+              </Link>
             </li>
             <li>
               <div className='dropdown ms-2'>
@@ -58,7 +50,7 @@ const Header = () => {
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
-                  User name
+                  Login/SignUp
                 </button>
                 <ul
                   className='dropdown-menu'
@@ -66,19 +58,20 @@ const Header = () => {
                 >
                   <li>
                     <a className='dropdown-item' href='.'>
-                      Hello User
+                      {mailId}
                     </a>
                   </li>
-
-                  <li>
-                    <a
-                      className='dropdown-item'
-                      href='.'
-                      onClick={() => navigate("/")}
-                    >
-                      Logout
-                    </a>
-                  </li>
+                  <Link to='/login'>
+                    <li>
+                      <a
+                        className='dropdown-item'
+                        href='.'
+                        onClick={() => setMailId("hello user")}
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  </Link>
                 </ul>
               </div>
             </li>
