@@ -127,8 +127,10 @@ const TSreachResult = ({
                                   </div>
                                   <div className='mt-1 mb-1'>
                                     <p className='d-inline px-2'>
-                                      RETURN: {""}
-                                      <strong>hi</strong>
+                                      KM: {""}
+                                      <strong>
+                                        {data.departure.kilometers}
+                                      </strong>
                                     </p>
                                   </div>
                                 </div>
